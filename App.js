@@ -1,12 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { TelegramWebApp, useStartParam, useTelegramWebApp, useIsTelegramWebAppReady } from 'react-telegram-webapp';
+
+async function validateHash(hash) {
+  // const response = await fetch(`/api/validate`, {
+  //     method: 'POST',
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ hash }),
+  // });
+  
+  return true; //response.ok;
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TelegramWebApp validateHash={validateHash}>
+      <View style={styles.container}>
+        <Text>0000000000{useStartParam()}</Text>
+        <Text>1111111111{useIsTelegramWebAppReady()?'AAAA':'BBBB'}</Text>
+        <Text>2222222222{useTelegramWebApp()?.initData}</Text>
+      </View>
+    </TelegramWebApp>
   );
 }
 
